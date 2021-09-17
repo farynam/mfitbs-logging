@@ -2,6 +2,8 @@ import pino from "pino";
 import {dirname} from "path";
 import {fileURLToPath} from "url";
 
+const SEPARATOR = "/";
+
 let srcRoot = null;
 let logger = null;
 
@@ -11,17 +13,24 @@ function getAllAfter(str, part) {
 }
 
 function getPackageName(str, separator) {
-    separator = separator || "/";
+    separator = separator || SEPARATOR;
     let pack = getAllAfter(str, srcRoot);
-    // ""
+
     if (pack.length === 0) {
-        pack = separator;
-        // "/abc/abd"
+        pack = ".";
     } else if (pack.startsWith(separator)) {
         pack = pack.substr(1);
     }
 
     return pack.replaceAll(separator, ".");
+}
+
+function getCanonicalName(pack, className) {
+    if (pack.length === 1) {
+        return className;
+    }
+
+    return `${pack}.${className}`;
 }
 
 export class Logger {
@@ -46,9 +55,11 @@ export class Logger {
      */
     static createLogger(someImport) {
         const __dirname = dirname(fileURLToPath(someImport.url));
+        let pack = `${getPackageName(__dirname)}`;
+
         return logger.child(
             {
-                name: `${getPackageName(__dirname)}`
+                name: pack
             });
     }
 
@@ -59,9 +70,11 @@ export class Logger {
      */
     static createClassLogger(someImport) {
         const __dirname = dirname(fileURLToPath(someImport.url));
+        const pack = getPackageName(__dirname);
+
         return logger.child(
             {
-                name: `${getPackageName(__dirname)}.${this.constructor.name}`
+                name: getCanonicalName(pack, this.constructor.name)
             });
     }
 }

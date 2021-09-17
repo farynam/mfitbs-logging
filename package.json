@@ -4,7 +4,9 @@
   "description": "Simple Node.js logging library for es6 classes based on Pino and Pino-pretty",
   "repository": "https://github.com/farynam/mfitbs-logging.git",
   "type": "module",
-  "main": "index.js",
+  "exports": {
+    ".": "./src/main/logger/index.js"
+  },
   "scripts": {
     "run": "node src/test/index.js | ./node_modules/.bin/pino-pretty -t 'yyyy-mm-dd HH:MM:ss'",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,9 +16,10 @@
   "dependencies": {
     "path": "^0.12.7",
     "pino": "^6.13.2",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "pino-pretty": "^7.0.0"
   },
   "devDependencies": {
-    "pino-pretty": "^7.0.0"
+
   }
 }

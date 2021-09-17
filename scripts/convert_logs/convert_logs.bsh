@@ -1,11 +1,18 @@
 #!/bin/bash
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-. ${SCRIPT_DIR}/config.bsh
+
+if [ $1 ]; then
+    . $1
+else
+    . ${SCRIPT_DIR}/config.bsh
+fi
+
+
 
 cat /dev/null > ${IN}
 cat /dev/null > ${OUT}
 
-#while [ true ]; do
-    tail -f ${IN} | node_modules/.bin/pino-pretty -t 'yyyy-mm-dd HH:MM:ss' > ${OUT}
-    #sleep 5
-#done
+
+tail -f ${IN} | node_modules/.bin/pino-pretty -t 'yyyy-mm-dd HH:MM:ss' > ${OUT}
+
+
