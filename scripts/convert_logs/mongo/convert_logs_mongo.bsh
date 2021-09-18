@@ -1,0 +1,15 @@
+#!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+if [ $1 ]; then
+    . $1
+else
+    . ${SCRIPT_DIR}/config.bsh
+fi
+
+cat /dev/null > ${IN}
+
+mongo_db_url=mongodb://${MONGO_USER}:${MONGO_PASS}@${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_DATABASE}
+tail -f ${IN} | node_modules/.bin/pino-mongodb --collection logs ${mongo_db_url}
+
+

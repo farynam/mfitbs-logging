@@ -1,0 +1,11 @@
+#!/bin/bash
+IN=logs/in.log.txt
+MONGO_DB_HOST=localhost
+MONGO_DB_PORT=27017
+MONGO_DB_DATABASE=admin
+MONGO_USER=one
+MONGO_PASS=two
+
+MONGOSH=/Users/marcin/myapps/mongosh-1.0.6-darwin-x64/bin
+
+export PATH=${MONGOSH}:$PATH

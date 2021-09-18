@@ -1,0 +1,14 @@
+#!/bin/bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+if [ $1 ]; then
+    . $1
+else
+    . ${SCRIPT_DIR}/config.bsh
+fi
+
+mongo_db_url=mongodb://${MONGO_DB_HOST}:${MONGO_DB_PORT}/${MONGO_DB_DATABASE}
+
+mongosh -u ${MONGO_USER} -p ${MONGO_PASS} ${mongo_db_url} --eval "db.logs.drop()"
+

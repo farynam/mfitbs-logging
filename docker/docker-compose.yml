@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo:4.2.16
+    ports:
+      - "${MONGO_PORT}:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: one
+      MONGO_INITDB_ROOT_PASSWORD: two
+    networks:
+      vpcbr:
+        ipv4_address: ${SUBNET}.0.0.6
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SUBNET}.0.0.0/8
+
