@@ -7,5 +7,7 @@ MONGO_USER=one
 MONGO_PASS=two
 
 MONGOSH=/Users/marcin/myapps/mongosh-1.0.6-darwin-x64/bin
+TRANSLATIONS_CFG=config/translations.json
+
 
 export PATH=${MONGOSH}:$PATH

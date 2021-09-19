@@ -1,9 +1,13 @@
 {
   "name": "mfitbs-logging",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple Node.js logging library for es6 classes based on Pino and Pino-pretty",
   "repository": "https://github.com/farynam/mfitbs-logging.git",
   "type": "module",
+  "bin": {
+    "mfibs-logging-mongo": "scripts/convert_logs/mongo/convert_logs_mongo.bsh",
+    "mfitbs-translate": "node_modules/.bin/mfitbs-translate"
+  },
   "exports": {
     ".": "./src/main/logger/index.js"
   },
@@ -16,9 +20,10 @@
   "dependencies": {
     "path": "^0.12.7",
     "pino": "7.0.0-rc.4",
-    "pino-mongodb": "file:../pino-mongodb",
+    "pino-mongodb": "file:../../pino-mongodb",
     "pino-pretty": "^7.0.0",
     "url": "^0.11.0",
-    "webdiff-utils": "file:../../webdiff-all/webdiff-utils"
+    "webdiff-utils": "file:../../webdiff-all/webdiff-utils",
+    "mfitbs-translate": "file:../../nodejs/mfitbs-translate"
   }
 }
